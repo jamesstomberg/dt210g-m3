@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { routes } from '@/constants.ts';
-import { Route } from '@/interfaces/Interface.Routes.ts';
+import { routes } from '../constants';
+import { Route } from '../interfaces/Interface.Routes';
+import '@/assets/scss/Navigation.scss';
 
 export default function Navigation() {
     return (
-        <ul>
+        <ul class="site-navigation">
             {Object.entries(routes).map(([key, route]) => {
                 const typedRoute = route as Route;
 

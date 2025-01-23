@@ -1,0 +1,20 @@
+.site-navigation {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+
+    li {
+        text-transform: uppercase;
+        
+        a {
+            text-decoration: none;
+            color: #000;
+
+            &:hover {
+                color: #333;
+                cursor: pointer;
+            }
+        }
+    }
+}

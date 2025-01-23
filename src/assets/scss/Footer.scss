@@ -1,0 +1,13 @@
+.site-footer {
+    background-color: #000;
+    color: #fff;
+
+    .site-footer__inner {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+    }
+}

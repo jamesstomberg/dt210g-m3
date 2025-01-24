@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { api } from '@/constants';
+import { api } from './constants';
 
 class ApiClient {
     private client: AxiosInstance;
@@ -7,10 +7,10 @@ class ApiClient {
     // Constructor for setting up base URL.
     constructor(baseURL: string) {
         this.client = axios.create({
-            baseURL
+            baseURL,
         });
 
-        // Add request interceptor
+        // Add request interceptor.
         this.client.interceptors.request.use((config) => {
             const token = localStorage.getItem(api.authTokenStorageKey); // Retrieve token from localStorage.
 
@@ -21,7 +21,7 @@ class ApiClient {
             return config;
         });
 
-        // Add response interceptor
+        // Add response interceptor.
         this.client.interceptors.response.use(
             (response) => response,
             (error) => {
@@ -63,3 +63,13 @@ class ApiClient {
 
 // Export as singleton.
 export const apiClient = new ApiClient(api.baseURL);
+
+export async function apiPost<T>(url: string, data: Record<string, unknown>): Promise<T> {
+    try {
+        const response = await apiClient.post<T>(url, data);
+
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.response?.data?.message || 'API error');
+    }
+}

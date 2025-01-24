@@ -5,7 +5,7 @@ import '@/assets/scss/Navigation.scss';
 
 export default function Navigation() {
     return (
-        <ul class="site-navigation">
+        <ul className="site-navigation">
             {Object.entries(routes).map(([key, route]) => {
                 const typedRoute = route as Route;
 

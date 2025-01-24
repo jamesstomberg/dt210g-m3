@@ -6,6 +6,7 @@ import '@/assets/scss/LoginForm.scss';
 import { useUserStore } from '../stores/Store.UserStore';
 import { Navigate } from 'react-router-dom';
 import { routes } from '../constants';
+import DOMPurify from 'dompurify';
 
 export default function LoginForm() {
     const userStore = useUserStore();
@@ -60,8 +61,17 @@ export default function LoginForm() {
                 localStorage.setItem(api.authTokenStorageKey, data.token);
                 userStore.setUser(data.user_nicename, data.user_email);
             }
-        } catch {
-            setErrors(['Något gick fel! Kontrollera dina uppgifter eller försök igen senare.']);
+        } catch (error: any) {
+            console.log(error);
+            if (error.code === 'ERR_NETWORK') {
+                setErrors([
+                    'Kunde inte ansluta till server. Vänligen kontrollera din anslutning eller försök igen senare.',
+                ]);
+            } else if (error.response?.data?.message) {
+                setErrors([error.response.data.message]);
+            } else {
+                setErrors(['Ett oväntat fel inträffade. Vänligen försök igen senare.']);
+            }
         }
     };
 
@@ -75,7 +85,11 @@ export default function LoginForm() {
                 {errors && (
                     <ul>
                         {errors.map((error, index) => (
-                            <li key={index}>{error}</li>
+                            <li key={index}>
+                                <p
+                                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(error) }}
+                                />
+                            </li>
                         ))}
                     </ul>
                 )}

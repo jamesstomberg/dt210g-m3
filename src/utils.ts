@@ -70,6 +70,6 @@ export async function apiPost<T>(url: string, data: Record<string, unknown>): Pr
 
         return response.data;
     } catch (error: any) {
-        throw new Error(error.response?.data?.message || 'API error');
+        throw error;
     }
 }

@@ -2,12 +2,19 @@ import { NavLink } from 'react-router-dom';
 import { routes } from '../constants';
 import { Route } from '../interfaces/Interface.Routes';
 import '@/assets/scss/Navigation.scss';
+import { useUserStore } from '../stores/Store.UserStore';
 
 export default function Navigation() {
+    const userStore = useUserStore();
+
     return (
         <ul className="site-navigation">
             {Object.entries(routes).map(([key, route]) => {
                 const typedRoute = route as Route;
+
+                if (userStore.isLoggedIn && key === 'Login') {
+                    return;
+                }
 
                 return (
                     <li key={key}>
@@ -15,6 +22,7 @@ export default function Navigation() {
                     </li>
                 );
             })}
+            {userStore.isLoggedIn && <li><button onClick={userStore.logout}>Logga ut</button></li>}
         </ul>
     );
 }

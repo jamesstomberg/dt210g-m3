@@ -3,8 +3,13 @@ import { apiPost } from '../utils';
 import { validation, api } from '../constants';
 import * as Yup from 'yup';
 import '@/assets/scss/LoginForm.scss';
+import { useUserStore } from '../stores/Store.UserStore';
+import { Navigate } from 'react-router-dom';
+import { routes } from '../constants';
 
 export default function LoginForm() {
+    const userStore = useUserStore();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
@@ -53,11 +58,16 @@ export default function LoginForm() {
 
             if (data.token && data.user_nicename && data.user_email) {
                 localStorage.setItem(api.authTokenStorageKey, data.token);
+                userStore.setUser(data.user_nicename, data.user_email);
             }
         } catch {
             setErrors(['Något gick fel! Kontrollera dina uppgifter eller försök igen senare.']);
         }
     };
+
+    if (userStore.isLoggedIn) {
+        return <Navigate to={routes.About.path} replace />;
+    }
 
     return (
         <form className="login-form">

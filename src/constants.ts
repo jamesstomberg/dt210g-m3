@@ -29,3 +29,5 @@ export const validation: ValidationSchemas = {
         password: Yup.string().required('Du måste ange lösenord').min(4, 'Lösenord måste vara minst 4 tecken'),
     }),
 };
+
+export const zustandUserStorageName = 'dt210g-m3-storage';

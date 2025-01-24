@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Home from './pages/Page.Home';
 import About from './pages/Page.About';
 import Login from './pages/Page.Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([
     {
@@ -12,15 +13,19 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: routes.Home.path,
-                element: <Home title={routes.Home.text}/>,
+                element: <Home title={routes.Home.text} />,
             },
             {
                 path: routes.About.path,
-                element: <About title={routes.About.text}/>,
+                element: (
+                    <ProtectedRoute>
+                        <About title={routes.About.text} />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: routes.Login.path,
-                element: <Login title={routes.Login.text}/>,
+                element: <Login title={routes.Login.text} />,
             },
         ],
     },

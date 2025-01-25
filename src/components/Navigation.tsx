@@ -12,7 +12,7 @@ export default function Navigation() {
             {Object.entries(routes).map(([key, route]) => {
                 const typedRoute = route as Route;
 
-                if (userStore.isLoggedIn && key === 'Login') {
+                if (userStore.isLoggedIn && key === 'Login' || typedRoute.protected) {
                     return;
                 }
 

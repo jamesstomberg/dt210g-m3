@@ -7,14 +7,17 @@ export const routes: Routes = {
     Home: {
         path: '/',
         text: 'Start',
+        protected: false,
     },
     About: {
         path: '/om',
         text: 'Om',
+        protected: true,
     },
     Login: {
         path: '/logga-in',
         text: 'Logga in',
+        protected: false
     },
 };
 

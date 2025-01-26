@@ -13,6 +13,7 @@ export default function Posts({
     optionalParams?: object;
 }) {
     const [posts, setPosts] = useState<PostInterface[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [searchParams] = useSearchParams();
     const postID = searchParams.get('id');
 
@@ -20,6 +21,7 @@ export default function Posts({
         const getPosts = async () => {
             let posts: PostInterface[] = [];
             setPosts(posts);
+            setIsLoading(true);
 
             if (postID) {
                 posts = await postHelpers.getPost(postID);
@@ -28,6 +30,7 @@ export default function Posts({
             }
 
             setPosts(posts);
+            setIsLoading(false);
         };
 
         getPosts();
@@ -37,7 +40,9 @@ export default function Posts({
         <section>
             <h2>{optionalTitle}</h2>
 
-            {!posts.length && <p>Laddar...</p>}
+            {isLoading && <p>Laddar...</p>}
+
+            {!posts.length && !isLoading && <p>Inga inlägg hittades.</p>}
 
             {!postID && (
                 <ul>

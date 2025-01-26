@@ -7,7 +7,7 @@ export default function SinglePost({ post }: PostProps) {
 
     return (
         <>
-            <NavLink to={`/post`}>Tillbaka till alla inlägg</NavLink>
+            <NavLink to={`/post`}>Se alla inlägg</NavLink>
             <article key={post.id}>
                 <h3>{post.title.rendered}</h3>
 

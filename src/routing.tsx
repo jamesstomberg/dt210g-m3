@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { routes } from '@/constants';
+import { routes } from './constants';
 import Layout from './components/Layout';
 import Home from './pages/Page.Home';
 import About from './pages/Page.About';
 import Login from './pages/Page.Login';
+import PostPage from './pages/Page.Post';
 import ProtectedRoute from './components/ProtectedRoute';
-import { useUserStore } from './stores/Store.UserStore';
 
 const children = [
     {
@@ -23,6 +23,10 @@ const children = [
     {
         path: routes.Login.path,
         element: <Login title={routes.Login.text} />,
+    },
+    {
+        path: routes.Post.path,
+        element: <PostPage />,
     },
 ];
 

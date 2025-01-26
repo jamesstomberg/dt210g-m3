@@ -12,7 +12,10 @@ export default function Navigation() {
             {Object.entries(routes).map(([key, route]) => {
                 const typedRoute = route as Route;
 
-                if (userStore.isLoggedIn && key === 'Login' || typedRoute.protected) {
+                if (
+                    (userStore.isLoggedIn && key === 'Login') ||
+                    (!userStore.isLoggedIn && typedRoute.protected)
+                ) {
                     return;
                 }
 
@@ -22,7 +25,11 @@ export default function Navigation() {
                     </li>
                 );
             })}
-            {userStore.isLoggedIn && <li><button onClick={userStore.logout}>Logga ut</button></li>}
+            {userStore.isLoggedIn && (
+                <li>
+                    <button onClick={userStore.logout}>Logga ut</button>
+                </li>
+            )}
         </ul>
     );
 }

@@ -8,22 +8,32 @@ export const routes: Routes = {
         path: '/',
         text: 'Start',
         protected: false,
+        navigation: true,
     },
     About: {
         path: '/om',
         text: 'Om',
         protected: true,
+        navigation: true,
     },
     Post: {
         path: '/post',
         text: 'Inlägg',
         protected: false,
+        navigation: true,
     },
     Login: {
         path: '/logga-in',
         text: 'Logga in',
         protected: false,
+        navigation: true,
     },
+    EditPost: {
+        path: '/edit-post',
+        text: 'Redigera inlägg',
+        protected: true,
+        navigation: false,
+    }
 };
 
 export const api: ApiConfig = {

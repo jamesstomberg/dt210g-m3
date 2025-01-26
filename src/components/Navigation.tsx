@@ -14,7 +14,8 @@ export default function Navigation() {
 
                 if (
                     (userStore.isLoggedIn && key === 'Login') ||
-                    (!userStore.isLoggedIn && typedRoute.protected)
+                    (!userStore.isLoggedIn && typedRoute.protected) ||
+                    !route.navigation
                 ) {
                     return;
                 }

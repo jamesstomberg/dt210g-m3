@@ -5,6 +5,7 @@ import Home from './pages/Page.Home';
 import About from './pages/Page.About';
 import Login from './pages/Page.Login';
 import PostPage from './pages/Page.Post';
+import EditPostPage from './pages/Page.EditPost';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const children = [
@@ -27,6 +28,14 @@ const children = [
     {
         path: routes.Post.path,
         element: <PostPage />,
+    },
+    {
+        path: routes.EditPost.path,
+        element: (
+            <ProtectedRoute>
+                <EditPostPage title={routes.EditPost.text} />
+            </ProtectedRoute>
+        ),
     },
 ];
 

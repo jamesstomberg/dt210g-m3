@@ -42,5 +42,3 @@ export const validation: ValidationSchemas = {
 };
 
 export const zustandUserStorageName = 'dt210g-m3-storage';
-
-export const zustandPostsStorageName = 'dt210g-m3-posts-storage';

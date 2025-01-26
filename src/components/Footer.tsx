@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <footer className="site-footer">
             <div className="site-footer__inner">
-                <span>DT210G - Moment 2</span>
+                <span>DT210G - Moment 3</span>
                 <span>Mittuniversitetet</span>
                 <span>James Stomberg</span>
             </div>

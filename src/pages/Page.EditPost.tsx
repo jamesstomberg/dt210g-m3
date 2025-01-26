@@ -5,6 +5,7 @@ import { Post as PostInterface } from '../interfaces/Interface.Posts';
 import { useUserStore } from '../stores/Store.UserStore';
 import { Navigate } from 'react-router-dom';
 import { routes } from '../constants';
+import { NavLink } from 'react-router-dom';
 
 export default function EditPostPage({ title }: { title: string }) {
     const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -66,47 +67,51 @@ export default function EditPostPage({ title }: { title: string }) {
             <section>
                 <h1>{title}</h1>
 
-                {isLoading && <div>Laddar...</div>}
+                <NavLink to={`/post`}>Se alla inlägg</NavLink>
 
-                {postID && !isLoading && posts.length === 0 && (
-                    <div>Inget blogginlägg hittades.</div>
-                )}
+                <div>
+                    {isLoading && <div>Laddar...</div>}
 
-                {!postID && <div>Ogiltigt ID för blogginlägg.</div>}
+                    {postID && !isLoading && posts.length === 0 && (
+                        <div>Inget blogginlägg hittades.</div>
+                    )}
 
-                {postID && posts.length > 0 && postTitle && postContent && (
-                    <div>
-                        <form>
-                            <div>
-                                <label htmlFor="postTitle">Titel</label>
-                                <input
-                                    type="text"
-                                    name="postTitle"
-                                    id="postTitle"
-                                    value={postTitle}
-                                    onChange={(e) => {
-                                        setPostTitle(e.target.value);
-                                    }}
-                                />
-                            </div>
+                    {!postID && <div>Ogiltigt ID för blogginlägg.</div>}
 
-                            <div>
-                                <label htmlFor="postContent">Innehåll</label>
-                                <textarea
-                                    id="postContent"
-                                    value={postContent}
-                                    onChange={(e) => {
-                                        setPostContent(e.target.value);
-                                    }}
-                                ></textarea>
-                            </div>
+                    {postID && posts.length > 0 && postTitle && postContent && (
+                        <div>
+                            <form>
+                                <div>
+                                    <label htmlFor="postTitle">Titel</label>
+                                    <input
+                                        type="text"
+                                        name="postTitle"
+                                        id="postTitle"
+                                        value={postTitle}
+                                        onChange={(e) => {
+                                            setPostTitle(e.target.value);
+                                        }}
+                                    />
+                                </div>
 
-                            <input type="submit" value="Spara" onClick={handleSubmit} />
-                        </form>
+                                <div>
+                                    <label htmlFor="postContent">Innehåll</label>
+                                    <textarea
+                                        id="postContent"
+                                        value={postContent}
+                                        onChange={(e) => {
+                                            setPostContent(e.target.value);
+                                        }}
+                                    ></textarea>
+                                </div>
 
-                        <button>Radera</button>
-                    </div>
-                )}
+                                <input type="submit" value="Spara" onClick={handleSubmit} />
+                            </form>
+
+                            <button>Radera</button>
+                        </div>
+                    )}
+                </div>
             </section>
         </>
     );

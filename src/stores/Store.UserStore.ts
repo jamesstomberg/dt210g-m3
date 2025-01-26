@@ -9,12 +9,16 @@ export const useUserStore = create<UserState>()(
             userNiceName: '',
             userEmail: '',
             isLoggedIn: false,
+            userID: 0,
+            userDisplayName: '',
 
-            setUser: (userNiceName, userEmail) => {
+            setUser: (userNiceName, userEmail, userID, userDisplayName) => {
                 set({
                     userNiceName,
                     userEmail,
                     isLoggedIn: true,
+                    userID: userID,
+                    userDisplayName: userDisplayName,
                 });
             },
 
@@ -23,6 +27,8 @@ export const useUserStore = create<UserState>()(
                     userNiceName: '',
                     userEmail: '',
                     isLoggedIn: false,
+                    userID: 0,
+                    userDisplayName: '',
                 });
             },
         }),

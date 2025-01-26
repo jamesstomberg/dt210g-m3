@@ -16,12 +16,14 @@ export default function LoginForm() {
     const [errors, setErrors] = useState<string[]>([]);
 
     const login = async (postData: object) => {
-        const data = await apiPost<{ token: string; user_nicename: string; user_email: string }>(
+        const data = await apiPost<{ token: string; user_nicename: string; user_email: string, user_id: number, user_display_name: string }>(
             '/jwt-auth/v1/token',
             {
                 ...postData,
             }
         );
+
+        console.log(data);
 
         return data;
     };
@@ -57,9 +59,9 @@ export default function LoginForm() {
         try {
             const data = await login(postData);
 
-            if (data.token && data.user_nicename && data.user_email) {
+            if (data.token && data.user_nicename && data.user_email && data.user_id && data.user_display_name) {
                 localStorage.setItem(api.authTokenStorageKey, data.token);
-                userStore.setUser(data.user_nicename, data.user_email);
+                userStore.setUser(data.user_nicename, data.user_email, data.user_id, data.user_display_name);
             }
         } catch (error: any) {
             console.log(error);

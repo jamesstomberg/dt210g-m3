@@ -33,7 +33,7 @@ export const routes: Routes = {
         text: 'Redigera inlägg',
         protected: true,
         navigation: false,
-    }
+    },
 };
 
 export const api: ApiConfig = {
@@ -48,6 +48,16 @@ export const validation: ValidationSchemas = {
         password: Yup.string()
             .required('Du måste ange lösenord')
             .min(4, 'Lösenord måste vara minst 4 tecken'),
+    }),
+
+    postForm: Yup.object({
+        postID: Yup.number().required('Ogiltigt ID för inlägg.'),
+        post_title: Yup.string()
+            .required('Du måste ange en titel')
+            .min(3, 'Titel måste vara minst 3 tecken'),
+        post_content: Yup.string()
+            .required('Du måste ange ett innehåll')
+            .min(10, 'Innehåll måste vara minst 10 tecken'),
     }),
 };
 

@@ -23,8 +23,6 @@ export default function LoginForm() {
             }
         );
 
-        console.log(data);
-
         return data;
     };
 
@@ -38,6 +36,7 @@ export default function LoginForm() {
             if (error instanceof Yup.ValidationError) {
                 setErrors(error.errors);
             }
+
             return false;
         }
     };

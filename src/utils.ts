@@ -73,3 +73,13 @@ export async function apiPost<T>(url: string, data: Record<string, unknown>): Pr
         throw error;
     }
 }
+
+export async function apiDelete<T>(url: string): Promise<T> {
+    try {
+        const response = await apiClient.delete<T>(url);
+
+        return response.data;
+    } catch (error: any) {
+        throw error;
+    }
+}

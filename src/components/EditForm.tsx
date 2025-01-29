@@ -3,12 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { postHelpers } from '../helpers/Helpers.posts';
 import { Post as PostInterface } from '../interfaces/Interface.Posts';
 import { useUserStore } from '../stores/Store.UserStore';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
 import { NavLink } from 'react-router-dom';
 import { validation } from '../constants';
 import * as Yup from 'yup';
-import { apiPost } from '../utils';
+import { apiPost, apiDelete } from '../utils';
 import DOMPurify from 'dompurify';
 
 export default function EditForm({ title }: { title: string }) {
@@ -23,6 +23,7 @@ export default function EditForm({ title }: { title: string }) {
     const [redirect, setRedirect] = useState(false);
     const [errors, setErrors] = useState<string[]>([]);
     const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getPosts = async () => {
@@ -114,6 +115,41 @@ export default function EditForm({ title }: { title: string }) {
             }
         } catch (error: any) {
             console.log(error);
+
+            if (error.code === 'ERR_NETWORK') {
+                setErrors([
+                    'Kunde inte ansluta till server. Vänligen kontrollera din anslutning eller försök igen senare.',
+                ]);
+            } else if (error.response?.data?.message) {
+                setErrors([error.response.data.message]);
+            } else {
+                setErrors(['Ett oväntat fel inträffade. Vänligen försök igen senare.']);
+            }
+        }
+    };
+
+    const deletePost = async (postID: number | undefined) => {
+        const data = await apiDelete<any>(`/wp/v2/posts/${postID}`);
+
+        return data;
+    };
+
+    const handleDelete = async (e: any) => {
+        e.preventDefault();
+
+        if (!confirm('Är du säker på att du vill radera inlägget?')) {
+            return;
+        }
+
+        try {
+            const data = await deletePost(post?.id);
+
+            if (data) {
+                navigate(routes.About.path, { replace: true });
+            }
+        } catch (error: any) {
+            console.log(error);
+
             if (error.code === 'ERR_NETWORK') {
                 setErrors([
                     'Kunde inte ansluta till server. Vänligen kontrollera din anslutning eller försök igen senare.',
@@ -198,7 +234,7 @@ export default function EditForm({ title }: { title: string }) {
                                 <input type="submit" value="Spara" onClick={handleSubmit} />
                             </form>
 
-                            <button>Radera</button>
+                            <button onClick={handleDelete}>Radera</button>
                         </div>
                     )}
                 </div>

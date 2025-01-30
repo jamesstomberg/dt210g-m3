@@ -17,7 +17,7 @@ export default function Header() {
                     <Navigation />
                 </div>
 
-                <div>DT210G</div>
+                <div className="site-header__course_text">DT210G</div>
             </div>
         </header>
     );

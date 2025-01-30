@@ -1,0 +1,12 @@
+.posts-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+
+    li {
+        padding: 1rem;
+        background-color: rgba(0, 129, 163, 0.2);
+        border-radius: 7px;
+        margin-bottom: 0.5rem;
+    }
+}

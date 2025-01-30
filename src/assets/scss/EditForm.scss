@@ -22,4 +22,16 @@
         padding: 0.1rem;
         margin: 10px 0;
     }
+
+    .edit-form__success {
+        background-color: rgb(121, 214, 121);
+        padding: 1rem;
+        border-radius: 7px;
+        margin: 10px 0;
+        max-width: fit-content;
+
+        p {
+            color: rgb(4, 60, 4) !important;
+        }
+    }
 }

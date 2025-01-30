@@ -4,6 +4,8 @@ import { Post as PostInterface } from '../interfaces/Interface.Posts';
 import ListPost from './ListPost';
 import SinglePost from './SinglePost';
 import { useSearchParams } from 'react-router-dom';
+import '@/assets/scss/Posts.scss';
+import Loader from './Loader';
 
 export default function Posts({
     optionalTitle = 'Blogginlägg',
@@ -40,12 +42,12 @@ export default function Posts({
         <section>
             <h2>{optionalTitle}</h2>
 
-            {isLoading && <p>Laddar...</p>}
+            {isLoading && <Loader />}
 
             {!posts.length && !isLoading && <p>Inga inlägg hittades.</p>}
 
             {!postID && (
-                <ul>
+                <ul className="posts-list">
                     {posts.map((post) => {
                         return <ListPost key={post.id} post={post} />;
                     })}

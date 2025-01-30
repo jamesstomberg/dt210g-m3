@@ -10,9 +10,17 @@ export default function SinglePost({ post }: PostProps) {
 
     return (
         <>
-            <NavLink to={`/post`}>Se alla inlägg</NavLink>
-            {userStore.isLoggedIn && post.author === userStore.userID && <NavLink to={`/edit-post?id=${post.id}`}>Hantera inlägg</NavLink>}
-            <article key={post.id}>
+            <div style={{ marginBottom: '2rem' }}>
+                <NavLink className="btn" to={`/post`}>
+                    Se alla inlägg
+                </NavLink>
+            </div>
+
+            {userStore.isLoggedIn && post.author === userStore.userID && (
+                <NavLink to={`/edit-post?id=${post.id}`} className="btn">Hantera inlägg</NavLink>
+            )}
+
+            <article key={post.id} className="single-post">
                 <h3>{post.title.rendered}</h3>
 
                 <div

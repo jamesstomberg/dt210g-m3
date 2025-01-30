@@ -1,0 +1,29 @@
+.loader {
+    display: inline-flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+    position: relative;
+}
+
+.loader::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid transparent;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: -25px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -11,6 +11,8 @@ import * as Yup from 'yup';
 import { apiPost, apiDelete } from '../utils';
 import DOMPurify from 'dompurify';
 import '@/assets/scss/EditForm.scss';
+import Loader from './Loader';
+
 
 export default function EditForm({ title }: { title: string }) {
     const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -112,10 +114,10 @@ export default function EditForm({ title }: { title: string }) {
             if (data) {
                 setSuccess(true);
                 setErrors([]);
+                setIsLoading(false);
 
                 setTimeout(() => {
                     setSuccess(false);
-                    setIsLoading(false);
                 }, 2000);
             }
         } catch (error: any) {
@@ -177,11 +179,14 @@ export default function EditForm({ title }: { title: string }) {
         <>
             <section className="edit-form">
                 <h1>{title}</h1>
-
-                <NavLink to={`/post`}>Se alla inlägg</NavLink>
+                <div style={{ marginBottom: '2rem' }}>
+                    <NavLink className="btn" to={`/post`}>
+                        Se alla inlägg
+                    </NavLink>
+                </div>
 
                 <div>
-                    {isLoading && <div>Laddar...</div>}
+                    {isLoading && <Loader />}
 
                     {errors.length > 0 && (
                         <div className="edit-form__errors">
@@ -240,7 +245,12 @@ export default function EditForm({ title }: { title: string }) {
                                 </div>
 
                                 <div className="edit-form__btn-container">
-                                    <input type="submit" value="Spara" onClick={handleSubmit} disabled={isLoading}/>
+                                    <input
+                                        type="submit"
+                                        value="Spara"
+                                        onClick={handleSubmit}
+                                        disabled={isLoading}
+                                    />
                                     <button className="btn btn__delete" onClick={handleDelete}>
                                         Radera
                                     </button>

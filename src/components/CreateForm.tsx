@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { apiPost } from '../utils';
 import DOMPurify from 'dompurify';
 import '@/assets/scss/CreateForm.scss';
+import Loader from './Loader';
 
 export default function CreateForm({ title }: { title: string }) {
     const [postTitle, setPostTitle] = useState<string | undefined>('');
@@ -94,10 +95,14 @@ export default function CreateForm({ title }: { title: string }) {
             <section className="create-form">
                 <h1>{title}</h1>
 
-                <NavLink to={`/post`}>Se alla inlägg</NavLink>
+                <div style={{ marginBottom: '2rem' }}>
+                    <NavLink className="btn" to={`/post`}>
+                        Se alla inlägg
+                    </NavLink>
+                </div>
 
                 <div>
-                    {isLoading && <div>Laddar...</div>}
+                    {isLoading && <Loader />}
 
                     {errors.length > 0 && (
                         <div className="create-form__errors">

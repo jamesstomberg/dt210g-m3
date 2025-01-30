@@ -21,9 +21,17 @@ export default function ListPost({ post }: PostProps) {
                             }}
                         ></span>
 
-                        <NavLink to={`/post?id=${post.id}`}>Läs mer</NavLink>
+                        <div style={{display: "flex", gap: "1rem", marginTop: "1rem"}}>
+                            <NavLink to={`/post?id=${post.id}`} className="btn">
+                                Läs mer
+                            </NavLink>
 
-                        {userStore.isLoggedIn && post.author === userStore.userID && <NavLink to={`/edit-post?id=${post.id}`}>Hantera inlägg</NavLink>}
+                            {userStore.isLoggedIn && post.author === userStore.userID && (
+                                <NavLink to={`/edit-post?id=${post.id}`} className="btn">
+                                    Hantera inlägg
+                                </NavLink>
+                            )}
+                        </div>
                     </div>
                 </div>
             </li>

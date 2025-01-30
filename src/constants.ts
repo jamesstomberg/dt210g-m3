@@ -34,6 +34,12 @@ export const routes: Routes = {
         protected: true,
         navigation: false,
     },
+    CreatePost: {
+        path: '/create-post',
+        text: 'Skapa inlägg',
+        protected: true,
+        navigation: false,
+    },
 };
 
 export const api: ApiConfig = {

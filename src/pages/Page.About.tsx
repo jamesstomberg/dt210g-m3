@@ -1,5 +1,7 @@
 import { useUserStore } from '../stores/Store.UserStore';
 import Posts from '../components/Posts';
+import { NavLink } from 'react-router-dom';
+import { routes } from '../constants';
 
 export default function About({ title }: { title: string }) {
     const userStore = useUserStore();
@@ -19,7 +21,11 @@ export default function About({ title }: { title: string }) {
 
                 <div>
                     <h2>Hej {userStore.userDisplayName}</h2>
-                    <p>Här kan du se en lista över dina blogginlägg och hantera dem.</p>
+                    <p>
+                        Här kan du se en lista över dina blogginlägg, hantera dem samt skapa nya
+                        blogginlägg.
+                    </p>
+                    <NavLink to={routes.CreatePost.path}>Skapa inlägg</NavLink>
                 </div>
             </section>
 

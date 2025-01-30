@@ -1,6 +1,21 @@
+@import './components/button';
+@import './components/div-label-input-combo';
+
 .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .login-form__btn-container {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+
     .login-form__errors {
         color: #6a0d0d;
         background-color: #f2a2a2;
+        padding: 0.1rem;
+        margin: 10px 0;
     }
 }

@@ -16,12 +16,15 @@ export default function LoginForm() {
     const [errors, setErrors] = useState<string[]>([]);
 
     const login = async (postData: object) => {
-        const data = await apiPost<{ token: string; user_nicename: string; user_email: string, user_id: number, user_display_name: string }>(
-            '/jwt-auth/v1/token',
-            {
-                ...postData,
-            }
-        );
+        const data = await apiPost<{
+            token: string;
+            user_nicename: string;
+            user_email: string;
+            user_id: number;
+            user_display_name: string;
+        }>('/jwt-auth/v1/token', {
+            ...postData,
+        });
 
         return data;
     };
@@ -58,9 +61,20 @@ export default function LoginForm() {
         try {
             const data = await login(postData);
 
-            if (data.token && data.user_nicename && data.user_email && data.user_id && data.user_display_name) {
+            if (
+                data.token &&
+                data.user_nicename &&
+                data.user_email &&
+                data.user_id &&
+                data.user_display_name
+            ) {
                 localStorage.setItem(api.authTokenStorageKey, data.token);
-                userStore.setUser(data.user_nicename, data.user_email, data.user_id, data.user_display_name);
+                userStore.setUser(
+                    data.user_nicename,
+                    data.user_email,
+                    data.user_id,
+                    data.user_display_name
+                );
             }
         } catch (error: any) {
             console.log(error);
@@ -82,8 +96,8 @@ export default function LoginForm() {
 
     return (
         <form className="login-form">
-            <div className="login-form__errors">
-                {errors && (
+            {errors.length > 0 && (
+                <div className="login-form__errors">
                     <ul>
                         {errors.map((error, index) => (
                             <li key={index}>
@@ -93,9 +107,10 @@ export default function LoginForm() {
                             </li>
                         ))}
                     </ul>
-                )}
-            </div>
-            <div>
+                </div>
+            )}
+
+            <div className="div-label-input-combo">
                 <label htmlFor="username">Användarnamn eller E-post</label>
                 <input
                     type="text"
@@ -105,7 +120,7 @@ export default function LoginForm() {
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
-            <div>
+            <div className="div-label-input-combo">
                 <label htmlFor="password">Lösenord</label>
                 <input
                     type="password"
@@ -115,7 +130,10 @@ export default function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <input type="submit" value="Logga in" onClick={handleSubmit} />
+
+            <div className="login-form__btn-container">
+                <input type="submit" value="Logga in" onClick={handleSubmit} />
+            </div>
         </form>
     );
 }

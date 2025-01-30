@@ -1,0 +1,26 @@
+@import './components/button';
+@import './components/div-label-input-combo';
+@import './components/input';
+
+.edit-form {
+
+    .edit-form__form {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .edit-form__btn-container {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+    }
+
+    .edit-form__errors {
+        color: #6a0d0d;
+        background-color: #f2a2a2;
+        padding: 0.1rem;
+        margin: 10px 0;
+    }
+}

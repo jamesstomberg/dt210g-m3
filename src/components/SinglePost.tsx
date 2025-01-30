@@ -2,6 +2,7 @@ import DOMPurify from 'dompurify';
 import { NavLink } from 'react-router-dom';
 import { PostProps } from '../interfaces/Interface.Posts';
 import { useUserStore } from '../stores/Store.UserStore';
+import '@/assets/scss/SinglePost.scss';
 
 export default function SinglePost({ post }: PostProps) {
     const sanitizedContent = DOMPurify.sanitize(post.content.rendered);

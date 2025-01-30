@@ -7,6 +7,7 @@ import { validation } from '../constants';
 import * as Yup from 'yup';
 import { apiPost } from '../utils';
 import DOMPurify from 'dompurify';
+import '@/assets/scss/CreateForm.scss';
 
 export default function CreateForm({ title }: { title: string }) {
     const [postTitle, setPostTitle] = useState<string | undefined>('');
@@ -90,7 +91,7 @@ export default function CreateForm({ title }: { title: string }) {
 
     return (
         <>
-            <section>
+            <section className="create-form">
                 <h1>{title}</h1>
 
                 <NavLink to={`/post`}>Se alla inlägg</NavLink>
@@ -98,7 +99,7 @@ export default function CreateForm({ title }: { title: string }) {
                 <div>
                     {isLoading && <div>Laddar...</div>}
 
-                    {errors && (
+                    {errors.length > 0 && (
                         <div className="create-form__errors">
                             <ul>
                                 {errors.map((error, index) => (
@@ -115,8 +116,8 @@ export default function CreateForm({ title }: { title: string }) {
                     )}
 
                     <div>
-                        <form>
-                            <div>
+                        <form className="create-form__form">
+                            <div className="div-label-input-combo">
                                 <label htmlFor="postTitle">Titel</label>
                                 <input
                                     type="text"
@@ -129,7 +130,7 @@ export default function CreateForm({ title }: { title: string }) {
                                 />
                             </div>
 
-                            <div>
+                            <div className="div-label-input-combo">
                                 <label htmlFor="postContent">Innehåll</label>
                                 <textarea
                                     id="postContent"
@@ -137,10 +138,13 @@ export default function CreateForm({ title }: { title: string }) {
                                     onChange={(e) => {
                                         setPostContent(e.target.value);
                                     }}
+                                    rows={10}
                                 ></textarea>
                             </div>
 
-                            <input type="submit" value="Spara" onClick={handleSubmit} />
+                            <div className="create-form__btn-container">
+                                <input type="submit" value="Spara" onClick={handleSubmit} />
+                            </div>
                         </form>
                     </div>
                 </div>

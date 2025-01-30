@@ -1,8 +1,11 @@
+@import './components/button';
+
 .site-navigation {
     list-style: none;
     margin: 0;
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 
     li {
         a {

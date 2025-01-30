@@ -28,7 +28,7 @@ const children = [
     },
     {
         path: routes.Post.path,
-        element: <PostPage />,
+        element: <PostPage title={routes.Post.text}/>,
     },
     {
         path: routes.EditPost.path,

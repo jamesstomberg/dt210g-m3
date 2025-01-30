@@ -25,7 +25,7 @@ export default function About({ title }: { title: string }) {
                         Här kan du se en lista över dina blogginlägg, hantera dem samt skapa nya
                         blogginlägg.
                     </p>
-                    <NavLink to={routes.CreatePost.path}>Skapa inlägg</NavLink>
+                    <NavLink className="btn" to={routes.CreatePost.path}>Skapa inlägg</NavLink>
                 </div>
             </section>
 

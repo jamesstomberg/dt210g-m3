@@ -1,6 +1,6 @@
-@import './components/button';
-@import './components/div-label-input-combo';
-@import './components/input';
+@use './components/button';
+@use './components/div-label-input-combo';
+@use './components/input';
 
 .create-form {
     .create-form__form {

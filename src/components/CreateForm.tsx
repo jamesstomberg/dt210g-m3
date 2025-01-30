@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useUserStore } from '../stores/Store.UserStore';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
 import { NavLink } from 'react-router-dom';
@@ -8,13 +7,10 @@ import * as Yup from 'yup';
 import { apiPost } from '../utils';
 import DOMPurify from 'dompurify';
 import '@/assets/scss/CreateForm.scss';
-import Loader from './Loader';
 
 export default function CreateForm({ title }: { title: string }) {
     const [postTitle, setPostTitle] = useState<string | undefined>('');
     const [postContent, setPostContent] = useState<string | undefined>('');
-    const [isLoading, setIsLoading] = useState(false);
-    const userStore = useUserStore();
     const [errors, setErrors] = useState<string[]>([]);
     const navigate = useNavigate();
 
@@ -102,8 +98,6 @@ export default function CreateForm({ title }: { title: string }) {
                 </div>
 
                 <div>
-                    {isLoading && <Loader />}
-
                     {errors.length > 0 && (
                         <div className="create-form__errors">
                             <ul>

@@ -1,5 +1,5 @@
-@import './components/button';
-@import './components/div-label-input-combo';
+@use './components/button';
+@use './components/div-label-input-combo';
 
 .login-form {
     display: flex;
